@@ -37,6 +37,8 @@ public class Banco {
         }catch(IOException e){
             e.printStackTrace(System.out);
         }
+        
+        
     }
     
     //metodo escribir en archivo 
