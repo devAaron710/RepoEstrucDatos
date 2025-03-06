@@ -1,5 +1,5 @@
-Nombre del Banco: mac
-Cantidad de cajas en el Banco: 7
+Nombre del Banco: BCR
+Cantidad de cajas en el Banco: 3
 Caja Preferencial: 1
 Caja Trámites Rápidos: 1
-Cajas Trámites No Preferenciales: 5
+Cajas Trámites No Preferenciales: 1

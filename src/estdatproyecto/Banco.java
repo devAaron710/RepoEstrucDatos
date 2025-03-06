@@ -36,9 +36,7 @@ public class Banco {
             //IOException maneja excepciones relacionadas con operaciones de entrada/salida (I/O), como leer o escribir archivo
         }catch(IOException e){
             e.printStackTrace(System.out);
-        }
-        
-        
+        }   
     }
     
     //metodo escribir en archivo 
