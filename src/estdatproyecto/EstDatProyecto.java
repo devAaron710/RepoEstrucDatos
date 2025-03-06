@@ -17,7 +17,7 @@ public class EstDatProyecto {
         //varible que mantiene el inicio de sesion en bucle hasta que se ingresen credenciales guardadas
         boolean autenticado = false;
         
-        // Bucle para solicitar credenciales hasta que sean correctas
+        //bucle para solicitar credenciales hasta que sean correctas
         while (!autenticado) {
             //Pedir nombre de usuario
             String user = JOptionPane.showInputDialog("Ingrese su nombre de usuario:");
@@ -66,7 +66,8 @@ public class EstDatProyecto {
                     "1. Crear tiquete\n" +
                     "2. Atender tiquete\n" +
                     "3. Mostrar cola\n" +
-                    "4. Salir"
+                    "4. Mostrar tipo de cambio\n" +
+                    "5. Salir"
             );
             
             //opcion cancelar
@@ -77,7 +78,7 @@ public class EstDatProyecto {
             
             switch (opcion) {
                 case "1": // Crear tiquete
-                    // Solicitar datos del tiquete al usuario
+                    //solicitar datos del tiquete al usuario
                     String nombre = JOptionPane.showInputDialog("Ingrese el nombre del cliente: ");
                     //.trim()elimina espacios en blanco en los extremos de la cadem
                     if (nombre == null || nombre.trim().isEmpty()) {
@@ -131,28 +132,31 @@ public class EstDatProyecto {
                         break;
                     }
 
-                    // Crear un nuevo tiquete con los datos ingresados
+                    //crear un nuevo tiquete con los datos ingresados
                     Tiquete tiquete = new Tiquete(nombre, id, edad, tipo, tramite);
-                    // Insertar el tiquete en la cola
+                    //insertar el tiquete en la cola
                     cola.insertar(tiquete);
                     break;
                     
-                case "2": // Atender tiquete
-                    // Atender el primer tiquete y mostrar el estado de la cola
+                case "2": //atender tiquete
+                    //atender el primer tiquete y mostrar el estado de la cola
                     cola.atender();
                     break;
 
-                case "3": // Mostrar cola
-                    // Mostrar el estado de la cola
+                case "3": //mostrar cola
+                    //mostrar el estado de la cola
                     JOptionPane.showMessageDialog(null, cola.toString());
                     break;
-
-                case "4": // Salir
+                case "4": //mostrar tipo de cambio con webScraping
+                    System.out.println(ScrapingWeb.getHTML("https://servicios.davivienda.cr/master/v1/davicotizador/"));
+                    new ScrapingWeb().scraping();
+                    break;
+                case "5": //salir
                     continuar = false;
                     break;
 
                 default:
-                    // Mensaje de opción inválida
+                    //mensaje de opción inválida
                     JOptionPane.showMessageDialog(null, "Opción no válida");
                     break;
             }
