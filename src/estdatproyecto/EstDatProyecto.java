@@ -7,7 +7,7 @@ import javax.swing.JPasswordField;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class EstDatProyecto {
+public class EstDatProyecto { //Prueba de git
     
     //credenciales en daatos quemados
     private static final String userName =  "admin";
@@ -80,7 +80,7 @@ public class EstDatProyecto {
                 case "1": // Crear tiquete
                     //solicitar datos del tiquete al usuario
                     String nombre = JOptionPane.showInputDialog("Ingrese el nombre del cliente: ");
-                    //.trim()elimina espacios en blanco en los extremos de la cadem
+                    //.trim()elimina espacios en blanco en los extremos de la cadena
                     if (nombre == null || nombre.trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "El nombre no puede quedar vacío.");
                         break;
@@ -104,6 +104,9 @@ public class EstDatProyecto {
                         JOptionPane.showMessageDialog(null, "La edad no puede quedar vacía.");
                         break;
                     }
+                    
+                    
+                    
                     int edad;
                     try {
                         edad = Integer.parseInt(edadStr);
