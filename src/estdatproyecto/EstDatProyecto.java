@@ -7,7 +7,7 @@ import javax.swing.JPasswordField;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class EstDatProyecto { //Prueba de git
+public class EstDatProyecto { 
     
     //credenciales en daatos quemados
     private static final String userName =  "admin";
@@ -104,9 +104,6 @@ public class EstDatProyecto { //Prueba de git
                         JOptionPane.showMessageDialog(null, "La edad no puede quedar vacía.");
                         break;
                     }
-                    
-                    
-                    
                     int edad;
                     try {
                         edad = Integer.parseInt(edadStr);
