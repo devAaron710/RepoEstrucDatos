@@ -145,7 +145,7 @@ public class EstDatProyecto {
 
                 case "3": //mostrar cola
                     //mostrar el estado de la cola
-                    JOptionPane.showMessageDialog(null, cola.toString());
+                    cola.mostrarCola();
                     break;
                 case "4": //mostrar tipo de cambio con webScraping
                     System.out.println(ScrapingWeb.getHTML("https://servicios.davivienda.cr/master/v1/davicotizador/"));
