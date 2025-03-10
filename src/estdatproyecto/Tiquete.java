@@ -28,7 +28,27 @@ public class Tiquete {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    public String getNombre() {
+        return nombre;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public LocalTime gethAtencion() {
+        return hAtencion;
+    }
+
+    public int getTramite() {
+        return tramite;
+    }
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -66,6 +86,17 @@ public class Tiquete {
     //se actuializa la hora de atencion del ticket 
     public void atender(){
         this.hAtencion = LocalTime.now();
+    }
+
+    // Metodo para asignar la prioridad de un tiquete
+    public int prioridad() {
+        if (tipo == 'P') { //Si su tipo es 'Preferencial' se le asigna la prioridad 3.
+            return 3;
+        } else if (tipo == 'A') { //Si la primera condicion no se cumpla, verifica si el tipo es 'A: Un solo tramite' y se le asigna la prioridad 2.
+            return 2;
+        } else { //Si ninguna de las condiciones se cumplen, su prioridad sera 1, que es la de menor prioridad.
+            return 1;
+        }
     }
 
     //con el metodo toString podemos hacer prints con objetos
