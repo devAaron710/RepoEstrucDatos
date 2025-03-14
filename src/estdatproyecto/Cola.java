@@ -13,10 +13,7 @@ public class Cola {
     public boolean esVacia() {
         return frent == null;
     }
-    
-    //aaron 
-    public void
-
+  
     /*kaaraya212*/
     // Método para insertar un nuevo tiquete en la cola
     public void insertar(Tiquete t) {
