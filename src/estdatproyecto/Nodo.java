@@ -5,8 +5,9 @@ package estdatproyecto;
  * @author Aaron Azofeifa
  */
 public class Nodo {
-    private Tiquete tiquete;
-    private Nodo sig;
+
+    Tiquete tiquete;
+    Nodo sig;
 
     public Nodo(Tiquete tiquete) {
         this.tiquete = tiquete;
