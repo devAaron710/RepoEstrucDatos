@@ -14,6 +14,7 @@ public class Banco {
     private int cajaPreferencial;
     private int cajaTramitesRapidos;
     private int cajasTramitesNoProferencial;
+    private Caja[] cajas; //Arreglo que representa las cajas disponibles del banco
     
     //Modulo 0 configuracion inicial de banco
     //crear variable tipo file
@@ -104,6 +105,32 @@ public class Banco {
         } catch (IOException e) {
             //Imprime la traza de la excepción en la consola
             e.printStackTrace(System.out);
+        }
+    }
+
+    public void crearCaja(int numeroCaja) {
+        this.cantCajas = numeroCaja;
+        this.cajas = new Caja[numeroCaja]; //Crea el arreglo de cajas
+        for (int i = 0; i < numeroCaja; i++) {
+            cajas[i] = new Caja(i + 1); //Crea las cajas desde el 1
+        }
+    }
+    
+    public Caja asignarCaja() {
+        for (Caja caja : cajas) {
+            if (caja.isDisponible()) {
+                caja.setDisponible(false);//Cambia de true a falsa para cambiar de disponible a ocupada
+                return caja;
+            }
+        }
+        return null; //No hay cajas disponibles
+    }
+    
+    public void liberarCaja(int numeroCaja) {
+        for (Caja caja : cajas) {
+            if (caja.getNumeroCaja() == numeroCaja) {
+                caja.setDisponible(true); //Libera la caja
+            }
         }
     }
 }
