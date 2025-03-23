@@ -14,16 +14,7 @@ public class Cola {
     public boolean esVacia() {
         return frent == null;
     }
-<<<<<<< Updated upstream
-  
-=======
-<<<<<<< HEAD
 
-    //aaron 
-=======
-  
->>>>>>> 0a4c6d0ab1825439fa1cb0bc7fad332f16a06582
->>>>>>> Stashed changes
     /*kaaraya212*/
     // Método para insertar un nuevo tiquete en la cola
     public void insertar(Tiquete t) {
