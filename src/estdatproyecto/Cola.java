@@ -9,6 +9,12 @@ import javax.swing.JOptionPane;
 public class Cola {
 
     private Nodo frent, ult;
+    private Banco banco; //Referencia a Banco
+
+    //Constructor para inicializar referencia a Banco
+    public Cola(Banco banco) {
+        this.banco = banco;
+    }
 
     // Método para verificar si la cola está vacía
     public boolean esVacia() {
@@ -31,7 +37,8 @@ public class Cola {
             nuevo.sig = actual.sig;
             actual.sig = nuevo;//Se conectan, es nodo actual ahora apunta al nuevo nodo.
         }
-        JOptionPane.showMessageDialog(null, "Tiquete insertado: " + t); // Mostrar detalles del tiquete insertado
+        //Llama al metodo para asignar una caja
+        tiqueteAtendido();
     }
 
     // Método para atender (desencolar) el primer nodo de la cola
@@ -42,7 +49,6 @@ public class Cola {
         }
         //Obtenemos el tiquete que sera atendido
         Tiquete atendido = frent.tiquete;
-
         String mensaje = "Tiquete atendido: \n"
                 + "Nombre: " + atendido.getNombre() + "\n"
                 + "ID: " + atendido.getId() + "\n"
@@ -53,7 +59,21 @@ public class Cola {
 
         JOptionPane.showMessageDialog(null, mensaje);
         frent = frent.sig;
+
+        //Llama al metodo para asignar una caja
+        tiqueteAtendido();
+
         return atendido;
+    }
+
+    public void tiqueteAtendido() {
+        Caja cajaAsignada = banco.asignarCaja(); //Asignar caja cuando el tiquete es atendido
+        if (cajaAsignada != null) {
+            JOptionPane.showMessageDialog(null, "Tiquete atendido en caja: " + cajaAsignada.getNumeroCaja());
+            banco.liberarCaja(cajaAsignada.getNumeroCaja()); //Liberar la caja despues de que el tiquete fue atendido
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay cajas disponibles.");
+        }
     }
 
     public void mostrarCola() {
