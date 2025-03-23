@@ -54,7 +54,7 @@ public class EstDatProyecto {
         banco.crearTXT();
         
         //instancia de objeto cola
-        Cola cola = new Cola();
+        Cola cola = new Cola(banco);
         //mantiene el menu en bucle hasta que ingrese salir
         boolean continuar = true;
         
