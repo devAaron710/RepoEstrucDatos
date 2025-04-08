@@ -1,91 +1,93 @@
-
 package estdatproyecto;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Tiquete {
-    //atributos del ticket
+
+    //Atributos de la clase
     private String nombre;
     private int id, edad;
-    private char tipo; // sea A, P O B 
+    private char tipo; // P:preferencial, A:un solo tramite, B:dos o mas tramites 
     private LocalTime hCreacion; //se crea varible de tipo localTime para almacenar la hora de generacion del ticket
     private LocalTime hAtencion; //se crea varible de tipo localTime para almacenar la hora cuando se atiende el ticket
     private int tramite; //se maneja con int, 1)Depósitos, 2)Retiros y 3)Cambio de Divisas
-    // hacer private los atributos
-    
+    private int numeroCaja;
+
     //constructor de ticket
-    public Tiquete(String nombre, int id, int edad, char tipo, int tramite) {
+    public Tiquete(String nombre, int id, int edad, char tipo, int tramite, int numeroCaja) {
         this.nombre = nombre;
         this.id = id;
         this.edad = edad;
         this.tipo = tipo;
-        this.hCreacion = LocalTime.now();//inicializamos la hora de creacion del ticket con el . now()
-        this.hAtencion = null; //inicializamos la hora de atencion del ticket en nulo porque no ha sido atendido 
+        this.hCreacion = LocalTime.now(); //Inicializamos la hora de creacion del ticket con el . now()
+        this.hAtencion = null; //Inicializamos la hora de atencion del ticket en nulo porque no ha sido atendido
         this.tramite = tramite;
+        this.numeroCaja = numeroCaja;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    
-    public String getNombre() {
-        return nombre;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getEdad() {
-        return edad;
-    }
-
-    public LocalTime gethAtencion() {
-        return hAtencion;
-    }
-
-    public int getTramite() {
-        return tramite;
-    }
-    
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getEdad() {
+        return edad;
     }
 
     public void setEdad(int edad) {
         this.edad = edad;
     }
 
+    public char getTipo() {
+        return tipo;
+    }
+
     public void setTipo(char tipo) {
         this.tipo = tipo;
+    }
+
+    public LocalTime gethCreacion() {
+        return hCreacion;
     }
 
     public void sethCreacion(LocalTime hCreacion) {
         this.hCreacion = hCreacion;
     }
 
+    public LocalTime gethAtencion() {
+        return hAtencion;
+    }
+
     public void sethAtencion(LocalTime hAtencion) {
         this.hAtencion = hAtencion;
+    }
+
+    public int getTramite() {
+        return tramite;
     }
 
     public void setTramite(int tramite) {
         this.tramite = tramite;
     }
-    
-    //se retorna el tipo del ticket
-    public char getTipo() {
-        return tipo;
+
+    public int getNumeroCaja() {
+        return numeroCaja;
     }
-    
-    //se retorna la hora de creacion del ticket
-    public LocalTime gethCreacion() {
-        return hCreacion;
-    }
-    
-    //se actuializa la hora de atencion del ticket 
-    public void atender(){
-        this.hAtencion = LocalTime.now();
+
+    public void setNumeroCaja(int numeroCaja) {
+        this.numeroCaja = numeroCaja;
     }
 
     // Metodo para asignar la prioridad de un tiquete
@@ -103,34 +105,36 @@ public class Tiquete {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String aux="";
-        if(hAtencion != null){
-            aux=hAtencion.format(formatter);
-        }else{
-            aux= "-1";
+        String aux = "";
+        if (hAtencion != null) {
+            aux = hAtencion.format(formatter);
+        } else {
+            aux = "-1";
         }
-        
+
         String aux2 = "";
-        if(tramite == 1){
+        if (tramite == 1) {
             aux2 = "1-Depósitos";
-        }else if(tramite == 2){
-            aux2= "2-Retiros";
-        }else if(tramite == 3){
-            aux2= "3-Cambio de Divisas";
-        }else{
-           aux2= "Número invalido!";
+        } else if (tramite == 2) {
+            aux2 = "2-Retiros";
+        } else if (tramite == 3) {
+            aux2 = "3-Cambio de Divisas";
+        } else {
+            aux2 = "Número invalido!";
         }
-        
-        String r="Tiquete" +
-               "\n[Nombre:  " + nombre +
-               "\nID:  " + id +
-               "\nEdad:  " + edad +
-               "\nHora de creación:  " + hCreacion.format(formatter) +
-               "\nHora de atención:  " + aux+
-               "\nTipo ticket:  " + tipo +
-               "\nTramite:  " + aux2 +
-                "]";
+
+        String r = ""
+                + "\nNombre:  " + nombre
+                + "\nID:  " + id
+                + "\nEdad:  " + edad
+                + "\nHora de creación:  " + hCreacion.format(formatter)
+                + "\nHora de atención:  " + aux
+                + "\nTipo ticket:  " + tipo
+                + "\nTramite:  " + aux2
+                + "\nNumero de caja:  " + numeroCaja
+                + "";
         return r;
-                
+
     }
 }
+
