@@ -3,94 +3,106 @@ package estdatproyecto;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Aaron Azofeifa
+ * Clase Cola que implementa una estructura de datos tipo FIFO. Almacena
+ * elementos de tipo Nodo, donde cada Nodo contiene un objeto de la clase
+ * Tiquete.
  */
 public class Cola {
 
-    private Nodo frent, ult;
-    private Banco banco; //Referencia a Banco
+    /**
+     * Nodo frente representa el frente (inicio) de la cola. Nodo último
+     * representa el ultimo (final) de la cola.
+     */
+    private Nodo frente, ultimo;
 
-    //Constructor para inicializar referencia a Banco
-    public Cola(Banco banco) {
-        this.banco = banco;
+    /**
+     * Constructor que inicializa una cola vacía.
+     */
+    public Cola() {
+        frente = null;
+        ultimo = null;
     }
 
-    // Método para verificar si la cola está vacía
+    /**
+     * Verifica si la cola está vacía.
+     *
+     * @return true si la cola está vacía, false en caso contrario
+     */
     public boolean esVacia() {
-        return frent == null;
+        return frente == null;
     }
 
-    /*kaaraya212*/
-    // Método para insertar un nuevo tiquete en la cola
+    /**
+     * Inserta (encola) un nuevo tiquete al final de la cola.
+     *
+     * @param t Objeto de tipo Tiquete a insertar.
+     */
     public void insertar(Tiquete t) {
         Nodo nuevo = new Nodo(t); //Se crea un nuevo nodo con el tiquete
-
-        if (this.esVacia() || t.prioridad() > frent.tiquete.prioridad()) { //Condicion verifica 1. Si la cola esta vacia y 2. Verifica si el tiquete insertado tiene una prioridad mayor que el primero de la cola(frent). Si el tiquete tiene mayor prioridad, debe colocarse al principio de la cola.
-            nuevo.sig = frent; //Nuevo nodo apunta al nodo que era el primero
-            frent = nuevo; //Nuevo nodo pasa a ser el primer nodo de la cola(frent apunta a nuevo nodo)
+        if (this.esVacia()) {
+            frente = ultimo = nuevo;
         } else {
-            Nodo actual = frent;
-            while (actual.sig != null && actual.sig.tiquete.prioridad() >= t.prioridad()) { //Se recorre la cola mientras el siguiente nodo no sea nulo
-                actual = actual.sig; //Si la prioridad del siguiente nodo es mayor o igual a la del nuevo tiquete, se avanza al siguiente nodo.
-            }
-            nuevo.sig = actual.sig;
-            actual.sig = nuevo;//Se conectan, es nodo actual ahora apunta al nuevo nodo.
+            ultimo.setSig(nuevo);
+            ultimo = nuevo;
         }
-        //Llama al metodo para asignar una caja
-        tiqueteAtendido();
     }
 
-    // Método para atender (desencolar) el primer nodo de la cola
+    /**
+     * Atiende (desencola) el primer tiquete de la cola.
+     *
+     * @return El tiquete atendido, o null sila cola está vacía.
+     */
     public Tiquete atender() {
         if (this.esVacia()) {
             JOptionPane.showMessageDialog(null, "No hay clientes en espera.");
-            return null; //Si la cola esta vacia, no se puede atender
+            return null;
         }
-        //Obtenemos el tiquete que sera atendido
-        Tiquete atendido = frent.tiquete;
-        String mensaje = "Tiquete atendido: \n"
-                + "Nombre: " + atendido.getNombre() + "\n"
-                + "ID: " + atendido.getId() + "\n"
-                + "Edad: " + atendido.getEdad() + "\n"
-                + "Tipo: " + atendido.getTipo() + "\n"
-                + "Tramite: " + atendido.getTramite() + "\n"
-                + "Prioridad: " + atendido.prioridad();
-
-        JOptionPane.showMessageDialog(null, mensaje);
-        frent = frent.sig;
-
-        //Llama al metodo para asignar una caja
-        tiqueteAtendido();
-
-        return atendido;
+        Tiquete t = frente.getTiquete();
+        frente = frente.getSig();
+        if (frente == null) {
+            ultimo = null; //Si la cola queda vacía despues de atender
+        }
+        return t;
     }
 
-    public void tiqueteAtendido() {
-        Caja cajaAsignada = banco.asignarCaja(); //Asignar caja cuando el tiquete es atendido
-        if (cajaAsignada != null) {
-            JOptionPane.showMessageDialog(null, "Tiquete atendido en caja: " + cajaAsignada.getNumeroCaja());
-            banco.liberarCaja(cajaAsignada.getNumeroCaja()); //Liberar la caja despues de que el tiquete fue atendido
-        } else {
-            JOptionPane.showMessageDialog(null, "No hay cajas disponibles.");
-        }
-    }
-
+    /**
+     * Muestra todos los tiquetes actualmente en la cola usando JOptionPane.
+     */
     public void mostrarCola() {
-        Nodo actual = frent;
+        Nodo actual = frente;
         while (actual != null) {
-            JOptionPane.showMessageDialog(null, "Clientes en espera: " + actual.tiquete);
-            actual = actual.sig;
+            JOptionPane.showMessageDialog(null, "Clientes en espera: " + actual.getTiquete());
+            actual = actual.getSig();
         }
     }
 
+    /**
+     * Cuenta la cantidad de tiquetes (nodos) presentes en la cola.
+     *
+     * @return Número total de elementos en la cola.
+     */
+    public int contar() {
+        int count = 0;
+        Nodo aux = frente;
+        while (aux != null) {
+            count++;
+            aux = aux.getSig();
+        }
+        return count;
+    }
+
+    /**
+     * Retorna una representación en texto del estado actual de la cola.
+     *
+     * @return Cadena con los tiquetes presentes o "Vacía" si no hay ninguno.
+     */
     @Override
     public String toString() {
         String r = "Cola{\n";
         if (this.esVacia()) {
             r += "Vacia\n}";
         } else {
-            Nodo aux = frent;
+            Nodo aux = frente;
             while (aux != null) {
                 r += aux + "\n";
                 aux = aux.getSig();
