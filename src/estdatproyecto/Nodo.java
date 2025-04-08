@@ -6,8 +6,8 @@ package estdatproyecto;
  */
 public class Nodo {
 
-    Tiquete tiquete;
-    Nodo sig;
+    private Tiquete tiquete;
+    private Nodo sig;
 
     public Nodo(Tiquete tiquete) {
         this.tiquete = tiquete;
@@ -16,10 +16,6 @@ public class Nodo {
 
     public Tiquete getTiquete() {
         return tiquete;
-    }
-
-    public void setTiquete(Tiquete tiquete) {
-        this.tiquete = tiquete;
     }
 
     public Nodo getSig() {
